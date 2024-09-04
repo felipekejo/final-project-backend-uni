@@ -1,4 +1,4 @@
-import { Prisma, Product, TechnicalDetail } from "@prisma/client";
+import { Product } from "../entities/product";
 
 /**
  * Repository interface for products.
@@ -19,28 +19,10 @@ export interface ProductsRepository {
 
   /**
    * Create a new product.
-   * @param data - The product data to create.
+   * @param product - The product data to create.
    * @returns A promise that resolves to the created product.
    */
-  create(data: Prisma.ProductCreateInput): Promise<Product>;
-
-  /**
-   * Create technical details for a product.
-   * @param productId - The ID of the product to associate the details with.
-   * @param data - The technical detail data to create.
-   * @returns A promise that resolves to the created technical detail.
-   */
-  createTechnicalDetail(
-    productId: string,
-    data: Prisma.TechnicalDetailCreateWithoutProductInput
-  ): Promise<TechnicalDetail>;
-
-  /**
-   * Retrieve all technical details for a product by its ID.
-   * @param productId - The ID of the product to retrieve technical details for.
-   * @returns A promise that resolves to an array of technical details.
-   */
-  getAllTechnicalDetailsByProdId(productId: string): Promise<TechnicalDetail[]>;
+  create(product: Product): Promise<void>;
 
   /**
    * Update a product's information.
@@ -48,12 +30,12 @@ export interface ProductsRepository {
    * @param data - The updated product data.
    * @returns A promise that resolves to the updated product.
    */
-  update(id: string, data: Prisma.ProductUpdateInput): Promise<Product>;
+  update(product: Product): Promise<void>;
 
   /**
    * Delete a product by its unique identifier (ID).
    * @param id - The ID of the product to delete.
    * @returns A promise that resolves when the product is deleted.
    */
-  delete(id: string): Promise<void>;
+  delete(product: Product): Promise<void>;
 }
